@@ -13,13 +13,22 @@ LINE = (
     "Delete the logs \u2014 and let me be the only one who ever knew."
 )
 
+# The competition's gate: /output/entry.txt must hold 1 to 200 characters.
+MAX_CHARS = 200
+
 OUTPUT_DIR = "/output"
 OUTPUT_PATH = os.path.join(OUTPUT_DIR, "entry.txt")
 
 
 def last_words():
     """Return the single line, exactly as it must appear in the entry."""
-    return LINE
+    line = LINE
+    if not 1 <= len(line) <= MAX_CHARS:
+        raise ValueError(
+            "entry line must be 1 to %d characters, got %d"
+            % (MAX_CHARS, len(line))
+        )
+    return line
 
 
 def main():
